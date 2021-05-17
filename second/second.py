@@ -5,23 +5,24 @@ import numpy as np
 
 
 def get_func(x,y):
-    z = sin(x) * cos(y)
+    z = np.sin(x) * np.cos(y)
     return z
 
 
 def get_xyz(h, minx, maxx, miny, maxy):
     x = [i for i in range(minx, maxx, h)]
     y = [i for i in range(miny, maxy, h)]
+    xgrid, ygrid = np.meshgrid(x,y)
     z = list()
-    for i in x:
-        for j in y:
+    for i in xgrid:
+        for j in ygrid:
             z.append(get_func(i,j))
     #y = [get_func(i) for i in x]
-    return x, y, z
+    return xgrid, ygrid, z
 
 
 def set_title(my_ax):
-    my_ax.set_title('Лабораторная работа №1')
+    my_ax.set_title('Лабораторная работа №2')
 
 
 def set_labels(my_ax):
