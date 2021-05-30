@@ -1,6 +1,7 @@
 import matplotlib.pyplot as plt
 from mpl_toolkits.mplot3d import Axes3D
 from math import *
+from mpl_toolkits.mplot3d import Axes3D
 import numpy as np
 
 
@@ -35,21 +36,28 @@ def set_text(my_ax):
     my_ax.text(0, 600, f'{label_string}', fontsize = 15)
 
 
-def graph(color_line, my_linestyle, my_marker, step, transparency, width, minx, maxx, miny, maxy):
-    my_ax = plt.axes()
-    fig = plt.figure()
-    my_ax = fig.add_subplot(projection = '3d')
-    #set_title(my_ax)
-    #set_labels(my_ax)
-    x, y, z = get_xyz(step, minx, maxx, miny, maxy)
-    #set_text(my_ax)
-    my_ax.plot(x, y, z)#,
-               #color=color_line,
-               #linestyle=my_linestyle,
-               #marker=my_marker,
-               #alpha=transparency,
-               #linewidth=width)
-    plt.grid(True)
+def get_range_x():
+    res = np.arange(0, 2*pi)
+    return res
+
+
+def get_range_y():
+    res = np.arange(0, pi)
+    return res
+
+
+def graph():  # color_line, my_linestyle, my_marker, step, transparency, width, minx, maxx, miny, maxy):
+    #my_ax = plt.axes()
+    my_fig = plt.figure(figsize=(7,4))
+    ax_3d = my_fig.add_subplot(projection = '3d')
+    x = get_range_x()
+    y = get_range_y()
+    xgrid, ygrid = np.meshgrid(x,y)
+    zgrid = get_func(xgrid, ygrid)
+    ax_3d.plot_surface(xgrid, ygrid, zgrid)
+    ax_3d.set_xlabel('x')
+    ax_3d.set_ylabel('y')
+    ax_3d.set_zlabel('z')
     plt.show()
 
 
@@ -154,24 +162,24 @@ def main():
     Пятый вариант
     :return:
     """
-    min_x, max_x = get_scatter_x()
-    min_y, max_y = get_scatter_y()
-    my_step = get_step()
-    my_color = get_color()
-    my_linestyle = get_linestyle()
-    my_marker = get_marker()
-    my_transp = get_coef_of_transparency()
-    my_width = get_width()
-    graph(color_line=my_color,
-          my_linestyle=my_linestyle,
-          my_marker=my_marker,
-          step=my_step,
-          transparency=my_transp,
-          width=my_width,
-          minx = min_x,
-          maxx = max_x,
-          miny = min_y,
-          maxy = max_y)
+    #min_x, max_x = get_scatter_x()
+    #min_y, max_y = get_scatter_y()
+    #my_step = get_step()
+    #my_color = get_color()
+    #y_linestyle = get_linestyle()
+    #my_marker = get_marker()
+    #my_transp = get_coef_of_transparency()
+    #my_width = get_width()
+    graph()#color_line=my_color,
+          #my_linestyle=my_linestyle,
+          #my_marker=my_marker,
+          #tep=my_step,
+          #transparency=my_transp,
+          #width=my_width,
+          #minx = min_x,
+          #maxx = max_x,
+          #miny = min_y,
+          #maxy = max_y)
 
 
 if __name__ == '__main__':
